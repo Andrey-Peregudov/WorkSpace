@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" rel="stylesheet" href="../static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link type="image/x-icon" rel="shortcut icon" href="../image/logo.png">
+    <title>WorkSpace</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="#" class="nav_logo nav_logo_image">WorkSpace</a>
+
+        <ul class="nav_menu">
+            <li class="nav_item">
+                <a href="http://127.0.0.1:8080/" class="nav_link">Главная</a>
+            </li>
+            <li class="nav_item">
+                <a href="http://127.0.0.1:8080/tolerances" class="nav_link">Определение отклонений</a>
+            </li>
+            <li class="nav_item">
+                <a href="#" class="nav_link">To Do</a>
+            </li>
+            <li class="nav_item">
+                <a href="#" class="nav_link">Converter</a>
+            </li>
+            <li class="nav_item">
+                <a href="#" class="nav_link">Reg</a>
+            </li>
+        </ul>
+
+    </nav>
+
+
+
+
+
+    </header>
+
+
+    <div class="wrapper">
+
+
+    <h2>Введите поле допуска и размер</h2>
+    <form action="tolerances" method="post">
+        <p>
+            Поле допуска:<br>
+            <input name="tolerances_class_to_find" type="text" />
+        </p>
+        <p>
+            Размер:<br>
+            <input name="size" type="number"/>
+        </p>
+        <input type="submit" value="Отправить" />
+    </form>
+            {% if result %}
+                <h2>Результат:</h2>
+                    <p>{{ result }}</p>
+                    <p>{{ result2 }}</p>
+                    <p>{{ result3 }}</p>
+            {% endif %}
+                  
+
+
+
+
+        <div class="footer">
+            <h6>Подвал сайта</h6>
+        </div>
+    </div>
+
+
+
+</body>
+</html>
