@@ -24,10 +24,11 @@ app = FastAPI(
     middleware=middleware,
     title="WorkSpace")
 #Путь до директории static
-app.mount("/static", StaticFiles(directory="static", html=True), name="static")
+#app.mount("/static", StaticFiles(directory="static", html=True), name="static")
+app.mount("/static", StaticFiles(directory="static", packages=None, html=False, check_dir=True, follow_symlink=False))
 #Путь до директории templates
 templates = Jinja2Templates(directory="templates")
-tolerances_page = Jinja2Templates(directory="tolerances")
+tolerances_page = Jinja2Templates(directory="tolerances/templates")
 
 # #Переменная для хранения сегодняшней даты
 # a = date.today()
@@ -60,7 +61,7 @@ def root():
     return FileResponse("templates/base.html")
 @app.get("/tolerances", tags=["Поля допусков"])
 def root():
-    return FileResponse("tolerances/tolerances_page.html")
+    return FileResponse("tolerances/templates/tolerances_page.html")
 
 
 @app.get('/tolerances', response_class=HTMLResponse, summary="Нахождение предельных отклонений", tags=["Поля допусков"])
@@ -98,6 +99,14 @@ def search_data(request: Request,
                     else:
                         return f"Данные отсутствуют"
     return tolerances_page.TemplateResponse("tolerances_page.html", {"request": request, "result": result, "result2":result2, "result3":result3})
+
+
+
+import angle
+
+app.include_router(angle.router, tags=["Users | angle.py"], prefix="/api")
+
+
 
 #search_data("H7",180)
 
