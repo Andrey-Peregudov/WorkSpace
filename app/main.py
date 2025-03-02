@@ -2,10 +2,14 @@
 from fastapi import FastAPI, Form, UploadFile, Request
 from fastapi.responses import FileResponse, HTMLResponse
 import json
+from fastapi import FastAPI
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from starlette.middleware import Middleware
 from starlette.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
 from starlette.templating import Jinja2Templates
+
+
 # from datetime import date
 #from pydantic import BaseModel, Field
 
@@ -29,6 +33,7 @@ app.mount("/static", StaticFiles(directory="static", packages=None, html=False, 
 #Путь до директории templates
 templates = Jinja2Templates(directory="templates")
 tolerances_page = Jinja2Templates(directory="tolerances/templates")
+angle_page = Jinja2Templates(directory="angle/templates")
 
 # #Переменная для хранения сегодняшней даты
 # a = date.today()
@@ -55,15 +60,25 @@ data = json.dumps(tolerances)
 #     tolerances_class_to_find: str = Field(min_length=2 ,max_length=4, description="Поле допускка")
 #     size: float = Field(min_length=1, max_length=4, ge=0, description="Номинальный размер")
 
-
+#URL адрес и путь к HTML странице с шаблоном главной страницы
 @app.get("/", tags=["Главная страница"])
 def root():
     return FileResponse("templates/base.html")
+
+
+#URL адрес и путь к HTML странице с шаблоном поиском отклонений
 @app.get("/tolerances", tags=["Поля допусков"])
 def root():
     return FileResponse("tolerances/templates/tolerances_page.html")
 
 
+#URL адрес и путь к HTML странице с шаблоном конвертера градусов
+@app.get("/angle", tags=["Конвертер градусов"])
+def root():
+    return FileResponse("angle/templates/angle.html")
+
+
+#Функция поиска отклонений по полю допуска
 @app.get('/tolerances', response_class=HTMLResponse, summary="Нахождение предельных отклонений", tags=["Поля допусков"])
 @app.post('/tolerances')
 def search_data(request: Request,
@@ -101,10 +116,46 @@ def search_data(request: Request,
     return tolerances_page.TemplateResponse("tolerances_page.html", {"request": request, "result": result, "result2":result2, "result3":result3})
 
 
+#Функция переода грдусов в десятичную систему
+@app.get('/angle', response_class=HTMLResponse, summary="Нахождение предельных отклонений", tags=["Поля допусков"])
+@app.post('/angle', response_class=HTMLResponse, summary="Нахождение предельных отклонений", tags=["Поля допусков"])
+def search_data(request: Request,
+                      degree: str = Form(...),
+                      minute: str = Form(...),
+                      second: str = Form(...)):
+    degree, minute, second = float(degree), float(minute), float(second)
+    result = (degree+(minute/60)+(second/3600))
+    result = round(result, 2)
+    return angle_page.TemplateResponse("angle.html", {"request": request, "result": result})
 
-import angle
 
-app.include_router(angle.router, tags=["Users | angle.py"], prefix="/api")
+@app.get('/angle', response_class=HTMLResponse, summary="Нахождение предельных отклонений", tags=["Поля допусков"])
+@app.post('/angle', response_class=HTMLResponse, summary="Нахождение предельных отклонений", tags=["Поля допусков"])
+def search_data(request: Request,
+                      degree_decimal: str = Form(...)):
+    degree_decimal = float(degree_decimal)
+    #Перевод из дестичной системы в градусы минуты секунды
+    deg_init = int(degree_decimal)
+    deg_float = float(degree_decimal-deg_init)
+    minutes = (deg_float*60)/1
+    minutes = round(min, 2)
+    min_int=int(minutes)
+    sec=((minutes-min_int)*60)/1
+    sec=round(sec, 2)
+    return angle_page.TemplateResponse("angle.html", {"request": request, "deg_init": deg_init, "min_int": min_int, "sec": sec})
+
+
+
+
+#
+# from angle import angle
+# from tolerances import tolerances
+#
+# app.include_router(angle.router, tags=["Angle | angle.py"], prefix = "/angle")
+# #app.include_router(tolerances.router, tags=["Tolerances | tolerances.py"], prefix = "/tolerances")
+
+
+
 
 
 
@@ -113,7 +164,6 @@ app.include_router(angle.router, tags=["Users | angle.py"], prefix="/api")
 # @app.route("/tolerances")
 # async def tolerances(search_data("H7",180)):
 #     return
-
 
 
 
@@ -137,9 +187,10 @@ app.include_router(angle.router, tags=["Users | angle.py"], prefix="/api")
 #     sec=((min-int(min))*60)/1
 #     sec=round(sec, 2)
 #     return f"Градусы {grad_init} Минуты {min_int} Секунды {sec}"
-
+# print(dec_to_grad(54.25))
 
 # if __name__ == "__main__":
+
 #     uvicorn.run("main:app", reload=True, host="0.0.0.0")
 #
 # @app.post("/uploadfile/")

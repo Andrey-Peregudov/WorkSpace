@@ -6,6 +6,11 @@ from starlette.middleware import Middleware
 from starlette.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from starlette.templating import Jinja2Templates
+
+router = FastAPI(
+    title="function_tolerances")
+
+
 # from datetime import date
 #from pydantic import BaseModel, Field
 
@@ -19,8 +24,8 @@ def load_tolersnces():
         return None
 
 
-@app.get('/tolerances', response_class=HTMLResponse, summary="Нахождение предельных отклонений", tags=["Поля допусков"])
-@app.post('/tolerances', response_class=HTMLResponse, summary="Нахождение предельных отклонений", tags=["Поля допусков"])
+@router.get('/tolerances', response_class=HTMLResponse, summary="Нахождение предельных отклонений", tags=["Поля допусков"])
+@router.post('/tolerances', response_class=HTMLResponse, summary="Нахождение предельных отклонений", tags=["Поля допусков"])
 def search_data(request: Request,
                       tolerances_class_to_find: str = Form(...),
                       size: float = Form(...)):
@@ -51,4 +56,4 @@ def search_data(request: Request,
 
                     else:
                         return f"Данные отсутствуют"
-    return templates.TemplateResponse("tolerasnces.html", {"request": request, "result": result})
+    return router.TemplateResponse("tolerasnces.html", {"request": request, "result": result})

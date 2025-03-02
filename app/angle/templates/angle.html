@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" rel="stylesheet" href="../static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link type="image/x-icon" rel="shortcut icon" href="../image/logo.png">
+    <title>WorkSpace</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="#" class="nav_logo nav_logo_image">WorkSpace</a>
+
+        <ul class="nav_menu">
+            <li class="nav_item">
+                <a href="http://127.0.0.1:8080/" class="nav_link">Главная</a>
+            </li>
+            <li class="nav_item">
+                <a href="http://127.0.0.1:8080/tolerances" class="nav_link">Определение отклонений</a>
+            </li>
+            <li class="nav_item">
+                <a href="http://127.0.0.1:8080/angle" class="nav_link">Конвертор углов</a>
+            </li>
+            <li class="nav_item">
+                <a href="#" class="nav_link">...</a>
+            </li>
+        </ul>
+        </nav>
+        </header>
+
+
+
+
+
+        </header>
+
+        <div class="wrapper">
+
+
+        <h2>Введите градусы, минуты, секудны, что бы перевести их в десятичную систему</h2>
+        <form action="angle" method="post">
+            <p>
+                Градусы:<br>
+                <input name="degree" type="text" />
+            </p>            <p>
+                Минуты:<br>
+                <input name="minute" type="text" />
+            </p>
+            <p>
+                Секунды:<br>
+                <input name="second" type="text" />
+            </p>
+            <input type="submit" value="Отправить" />
+        </form>
+                {% if result %}
+                    <h2>Результат:</h2>
+                        <p>{{ result }}&#176;</p>
+                {% endif %}
+
+                <h2>Введите градусы в десятичной систуме, что бы перевести их в градусы, минуты, секунды</h2>
+                <form action="angle" method="post">
+                    <p>
+                        Градусы в десятичной системе:<br>
+                        <input name="degree_decimal" type="text" />
+                    </p>            
+                    <input type="submit" value="Отправить" />
+                </form>
+
+                {% if deg_init %}
+                    <h2>Результат:</h2>
+                        <p>{{deg_init}}&#176;{{min_int}}'{{sec}}"</p>
+                {% endif %}
+                  
+
+
+
+
+
+        <div class="footer">
+            <h6>Подвал сайта</h6>
+        </div>
+    </div>
+
+
+
+</body>
+</html>
