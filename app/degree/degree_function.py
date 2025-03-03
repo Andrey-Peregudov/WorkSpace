@@ -2,10 +2,7 @@ from fastapi import Form, Request, APIRouter
 from fastapi.responses import HTMLResponse
 from starlette.templating import Jinja2Templates
 
-
-
 router = APIRouter()
-
 
 degree_page = Jinja2Templates(directory="degree/templates")
 
@@ -14,8 +11,8 @@ degree_page = Jinja2Templates(directory="degree/templates")
 def get_degree_form(request: Request):
     return degree_page.TemplateResponse("degree.html", {"request": request})
 
-@router.get('/degree', response_class=HTMLResponse, summary="Нахождение предельных отклонений", tags=["Поля допусков"])
-@router.post('/degree', response_class=HTMLResponse, summary="Нахождение предельных отклонений", tags=["Поля допусков"]) # Renamed and updated
+@router.get('/degree', response_class=HTMLResponse, summary="Перевод градусов вдесятичную систему", tags=["Конвертёр"])
+@router.post('/degree', response_class=HTMLResponse, summary="Перевод градусов вдесятичную систему", tags=["Конвертёр"]) # Renamed and updated
 async def convert_degree(request: Request,
                            degree: int = Form(le=360),
                            minute: int = Form(le=60),
@@ -28,5 +25,4 @@ async def convert_degree(request: Request,
         return degree_page.TemplateResponse("degree.html", {"request": request, "result": result})
     except ValueError:
         return degree_page.TemplateResponse("degree.html", {"request": request, "error": "Ошибка ввода. Введите значения заново"})
-
 

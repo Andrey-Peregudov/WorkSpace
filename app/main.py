@@ -6,7 +6,7 @@ from fastapi.staticfiles import StaticFiles
 from starlette.middleware import Middleware
 from starlette.middleware.cors import CORSMiddleware
 from starlette.templating import Jinja2Templates
-from .degree import degree_function
+from .degree import degree_function, degree_decimal_function
 from .tolerances import tolerances
 
 middleware = [
@@ -36,5 +36,6 @@ def root():
 
 
 app.include_router(degree_function.router)
+app.include_router(degree_decimal_function.router)
 app.include_router(tolerances.router)
 

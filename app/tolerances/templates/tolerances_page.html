@@ -63,19 +63,27 @@
         </p>
         <input type="submit" value="Отправить" />
     </form>
-            {% if result %}
+
+            {% if status == "OK" %}
                 <h2>Результат:</h2>
                     <p>{{ result }}</p>
                     <p>{{ result2 }}</p>
                     <p>{{ result3 }}</p>
+            {% else %}
+                    <p>{{ status }}</p>
             {% endif %}
-                  
+
+
+
+
 
 
 
 
         <div class="footer">
-            <h6>Подвал сайта</h6>
+            <div class="row">
+                &#169; Copyright 2025. Made by Andrew Peregudov
+                </div>
         </div>
     </div>
 
