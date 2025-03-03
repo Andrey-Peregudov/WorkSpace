@@ -11,7 +11,7 @@
 <body>
     <header>
         <nav class="navbar">
-            <a href="#" class="nav_logo nav_logo_image">WorkSpace</a>
+            <a href="http://127.0.0.1:8080/" class="nav_logo nav_logo_image">WorkSpace</a>
 
         <ul class="nav_menu">
             <li class="nav_item">
@@ -19,17 +19,27 @@
             </li>
             <li class="nav_item">
                 <a href="http://127.0.0.1:8080/tolerances" class="nav_link">Определение отклонений</a>
+                   
             </li>
+
             <li class="nav_item">
-                <a href="http://127.0.0.1:8080/angle" class="nav_link">Конвертор углов</a>
+                <a href="http://127.0.0.1:8080/degree" class="nav_link">Конвертор градусов</a>
+                <ul>
+                    <li class="nav_item">
+                        <a href="http://127.0.0.1:8080/degree" class="nav_link">Градусы в десятичную систему</a>
+                    </li>
+                    <li class="nav_item">
+                        <a href="http://127.0.0.1:8080/degree2" class="nav_link">Из десятичной системы в градусы</a>
+                    </li>
+                </ul>
             </li>
+
             <li class="nav_item">
                 <a href="#" class="nav_link">...</a>
             </li>
         </ul>
-        </nav>
-        </header>
-
+    </nav>
+    </header>
 
 
 
@@ -40,7 +50,7 @@
 
 
         <h2>Введите градусы, минуты, секудны, что бы перевести их в десятичную систему</h2>
-        <form action="angle" method="post">
+        <form action="degree" method="post">
             <p>
                 Градусы:<br>
                 <input name="degree" type="text" />
@@ -59,19 +69,11 @@
                         <p>{{ result }}&#176;</p>
                 {% endif %}
 
-                <h2>Введите градусы в десятичной систуме, что бы перевести их в градусы, минуты, секунды</h2>
-                <form action="angle" method="post">
-                    <p>
-                        Градусы в десятичной системе:<br>
-                        <input name="degree_decimal" type="text" />
-                    </p>            
-                    <input type="submit" value="Отправить" />
-                </form>
-
-                {% if deg_init %}
-                    <h2>Результат:</h2>
-                        <p>{{deg_init}}&#176;{{min_int}}'{{sec}}"</p>
+                {% if error %}
+                    <h1>Ошибка:</h1>
+                        <p>{{ error }}</p>
                 {% endif %}
+
                   
 
 
