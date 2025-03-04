@@ -6,7 +6,7 @@ from starlette.templating import Jinja2Templates
 
 router = APIRouter()
 
-tolerances_page = Jinja2Templates(directory="tolerances/templates")
+tolerances_page = Jinja2Templates(directory="templates")
 
 #URL адрес и путь к HTML странице с шаблоном поиском отклонений
 @router.get("/tolerances", tags=["Поля допусков"], response_class=HTMLResponse)

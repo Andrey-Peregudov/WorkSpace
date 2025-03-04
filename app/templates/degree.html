@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Перевод градусов в десятичную систему{% endblock %}
+{% block content %}
+        <h2>Введите градусы, минуты, секудны, что бы перевести их в десятичную систему</h2>
+        <form action="degree" method="post">
+            <p>
+                Градусы:<br>
+                <input name="degree" type="text" />
+            </p>            <p>
+                Минуты:<br>
+                <input name="minute" type="text" />
+            </p>
+            <p>
+                Секунды:<br>
+                <input name="second" type="text" />
+            </p>
+            <input type="submit" value="Отправить" />
+        </form>
+                {% if result %}
+                    <h2>Результат:</h2>
+                        <p>{{ result }}&#176;</p>
+                {% endif %}
+
+                {% if error %}
+                    <h1>Ошибка:</h1>
+                        <p>{{ error }}</p>
+                {% endif %}
+
+                  
+
+                    {% block degree_decimal %}
+                    {% endblock %}
+
+
+
+                <div class="footer">
+                    <div class="row">
+                        &#169; Copyright 2025. Made by Andrew Peregudov
+                        </div></div>
+{% endblock %}                        

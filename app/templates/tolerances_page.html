@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Предельные отклонения{% endblock %}
+{% block content %}
+
+    <h2>Введите поле допуска и размер</h2>
+    <form action="tolerances" method="post">
+        <p>
+            Поле допуска:<br>
+            <input name="tolerances_class_to_find" type="text" />
+        </p>
+        <p>
+            Размер:<br>
+            <input name="size" type="text"/>
+        </p>
+        <input type="submit" value="Отправить" />
+    </form>
+            {% if status == "OK" %}
+                <h2>Результат:</h2>
+                    <p>{{ result }}</p>
+                    <p>{{ result2 }}</p>
+                    <p>{{ result3 }}</p>
+            {% else %}
+                    <p>{{ status }}</p>
+            {% endif %}
+
+{% endblock %}

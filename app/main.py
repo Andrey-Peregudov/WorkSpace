@@ -8,6 +8,7 @@ from starlette.middleware.cors import CORSMiddleware
 from starlette.templating import Jinja2Templates
 from .degree import degree_function, degree_decimal_function
 from .tolerances import tolerances
+from .converter import converter_file
 
 middleware = [
     Middleware(
@@ -19,7 +20,6 @@ middleware = [
     )
 ]
 
-
 app = FastAPI(
     middleware=middleware,
     title="WorkSpace")
@@ -29,13 +29,11 @@ app.mount("/static", StaticFiles(directory="static", packages=None, html=False, 
 #Путь до директории templates
 templates = Jinja2Templates(directory="templates")
 
-
 @app.get("/", tags=["Главная страница"])
 def root():
     return FileResponse("templates/base.html")
 
-
 app.include_router(degree_function.router)
 app.include_router(degree_decimal_function.router)
 app.include_router(tolerances.router)
-
+app.include_router(converter_file.router)

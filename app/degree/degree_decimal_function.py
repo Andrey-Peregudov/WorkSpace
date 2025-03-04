@@ -4,14 +4,14 @@ from starlette.templating import Jinja2Templates
 
 router = APIRouter()
 
-degree_page = Jinja2Templates(directory="degree/templates")
+degree_page = Jinja2Templates(directory="templates")
 
-@router.get("/degree_decimal", tags=["Конвертер градусов"], response_class=HTMLResponse) # Correct tag and HTMLResponse
+@router.get("/degree_decimal", tags=["Конвертер градусов"], response_class=HTMLResponse)
 def get_degree_form(request: Request):
     return degree_page.TemplateResponse("degree_decimal.html", {"request": request})
 
 @router.get('/degree_decimal', response_class=HTMLResponse, summary="Перевод из десятичной системы в градусы", tags=["Конвертёр"])
-@router.post('/degree_decimal', response_class=HTMLResponse, summary="Перевод из десятичной системы в градусы", tags=["Конвертёр"]) # Renamed and updated
+@router.post('/degree_decimal', response_class=HTMLResponse, summary="Перевод из десятичной системы в градусы", tags=["Конвертёр"])
 async def convert_dec_degree(request: Request,
                            degree_dec : float = Form(le=360)):
     try:
