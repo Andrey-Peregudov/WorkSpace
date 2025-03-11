@@ -2,18 +2,19 @@
 {% block title %}Перевод из десятичной системы в градусы{% endblock %}
 {% block content %}
 
-<h2>Введите градусы в десятичной систуме, что бы перевести их в градусы, минуты, секунды</h2>
+<h2>Введите градусы в десятичной систуме, что-бы перевести их в градусы, минуты, секунды</h2>
 <form action="degree_decimal" method="post">
     <p>
         Градусы в десятичной системе:<br>
-        <input name="degree_decimal" type="text" />
+        <input name="degree" type="text" />
     </p>            
     <input type="submit" value="Отправить" />
 </form>
 
 {% if grad_init %}
     <h2>Результат:</h2>
-        <p>{{grad_init}}&#176;{{min_int}}'{{sec}}"</p>
+        <p>{{ grad_init }}&#176;{{ min_int }}'{{ sec }}"</p>
+   
 {% endif %}
 
 {% endblock %}

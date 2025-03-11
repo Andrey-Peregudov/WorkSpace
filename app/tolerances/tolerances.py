@@ -1,17 +1,17 @@
 from fastapi import Form, Request, APIRouter
 from fastapi.responses import HTMLResponse
 import json
-from starlette.templating import Jinja2Templates
+from template_metod import templates
 
 
 router = APIRouter()
 
-tolerances_page = Jinja2Templates(directory="templates")
+templates = templates
 
 #URL адрес и путь к HTML странице с шаблоном поиском отклонений
 @router.get("/tolerances", tags=["Поля допусков"], response_class=HTMLResponse)
 def tolerances_root(request: Request):
-    return tolerances_page.TemplateResponse("tolerances_page.html", {"request": request})
+    return templates.TemplateResponse("tolerances_page.html", {"request": request})
 
 #Функция для открытия файла json с полями допусков
 def load_tolersnces():
@@ -73,4 +73,4 @@ def search_data(request: Request,
     else:
         status = "Данное поле допуска отсутствует в базе"
 
-    return tolerances_page.TemplateResponse("tolerances_page.html", {"request": request, "result": result, "result2": result2, "result3": result3, "status": status})
+    return templates.TemplateResponse("tolerances_page.html", {"request": request, "result": result, "result2": result2, "result3": result3, "status": status})

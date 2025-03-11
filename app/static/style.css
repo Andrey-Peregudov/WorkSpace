@@ -25,6 +25,23 @@ a{
 header{
     border-bottom: 1px solid #e2e8f0;
 }
+.error{
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+}
+.work{
+    color:#F5C30F;
+}
+.space{
+    color:#42756E;
+}
+
 
 .navbar{
     display: flex;
@@ -59,7 +76,7 @@ header{
 } 
 
 .nav_link:hover{
-    color:#482ff7
+    color:#7d007d;
 }
 .nav_link::last-child{
     margin-right: 0;
@@ -75,12 +92,12 @@ header{
     background-repeat: no-repeat;
     color: #482ff7;
 }
-.nav_logo_image{
+/* .nav_logo_image .nav_logo{
     background-image: url('../image/logo.png');
     width: 200px;
     height: 200px;
     padding-left: 50px;
-}
+} */
 
 input[type=text]{
     width: 50%;
@@ -126,7 +143,7 @@ input[type=submit]{
     left: 0;
     right: 0;
     padding: 2rem;
-    background: purple;
+    background: #7d007d;
     color: white;
     font-weight: 500;
     display: flex;
@@ -134,3 +151,22 @@ input[type=submit]{
     align-items: center;
     gap: 0.2rem;
   }
+  .row{
+    text-align: center; /* Выравниваем текст и иконки по центру */
+    padding: 10px; /* Добавляем немного отступов */
+    /* background-color: #f0f0f0;  Светлый фон для контраста */
+  }
+  .social-links {
+    margin-top: 10px; /* Отступ от текста копирайта */
+}
+
+.social-links a {
+    display: inline-block; /* Размещаем ссылки в одну строку */
+    margin: 0 5px; /* Отступ между иконками */
+}
+
+.social-links img {
+    width: 30px; /* Задаем размер иконок */
+    height: 30px;
+    vertical-align: middle; /* Выравниваем иконки по центру по вертикали */
+}
