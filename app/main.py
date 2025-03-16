@@ -34,10 +34,12 @@ templates = templates
 def root():
     return FileResponse("templates/base.html")
 
+#Шаблон банера ошибки 404
 @app.exception_handler(404)
 async def custom_404_handler(request, __):
     return templates.TemplateResponse("404.html", {"request": request})
 
+#Шаблон банера ошибки 422
 @app.exception_handler(422)
 async def custom_422_handler(request, __):
     return templates.TemplateResponse("422.html", {"request": request})
