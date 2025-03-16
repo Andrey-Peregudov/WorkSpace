@@ -6,6 +6,7 @@ from ..model.models import UserDB, UserDB
 from ..model.dbbase import get_session
 from sqlalchemy import select
 from jose import jwt
+from ..config import key, algorithm
 
 
 router = APIRouter(include_in_schema=False)
@@ -35,7 +36,7 @@ async def user_create(
             return templates.TemplateResponse("user_login.html", {"request": request, "error": error})
         else:
             if db_user.check_password(password):
-                jwt_token = jwt.encode(claims={"sub":email}, key="dPMG83^#*@kjhv*fdsvVF", algorithm = "HS256")
+                jwt_token = jwt.encode(claims={"sub":email}, key=key, algorithm = algorithm)
                 response.set_cookie(key="access_token", value=jwt_token, httponly=True)
                 message = "Вы успешно вошли в систему"
                 response = templates.TemplateResponse("base.html", {"request": request, "message": message})
