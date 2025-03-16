@@ -6,12 +6,12 @@ router = APIRouter()
 
 @router.get("/converter_file", tags=["Конвертер файлов"], response_class=HTMLResponse)
 def get_file_convert_form(request: Request):
-    return templates.TemplateResponse("abc.html", {"request": request})
+    return templates.TemplateResponse("converter_file.html", {"request": request})
 
 
-# @router.get('/converter_file', response_class=HTMLResponse, summary="Конвертация файлов", tags=["Конвертёр файлов"])
-# @router.post('/converter_file', response_class=HTMLResponse, summary="Конвертация файлов", tags=["Конвертёр файлов"])
-# def create_upload_file(request: Request, file: UploadFile):
-#     filename = file.size
-#     print(filename)
-#     return templates.TemplateResponse("converter_file.html", {"request": request})
+@router.get('/converter_file', response_class=HTMLResponse, summary="Конвертация файлов", tags=["Конвертёр файлов"])
+@router.post('/converter_file', response_class=HTMLResponse, summary="Конвертация файлов", tags=["Конвертёр файлов"])
+def create_upload_file(request: Request, file: UploadFile):
+    filename = file.size
+    print(filename)
+    return templates.TemplateResponse("converter_file.html", {"request": request})
