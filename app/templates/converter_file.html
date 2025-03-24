@@ -11,17 +11,24 @@
         <input type="file" id="converter_file" name="converter_file" accept="image/jpeg,image/tiff,application/pdf" />
     </p>
     <p>
-        <input  class="file" type="checkbox" name="conversion_type" value="jpeg_to_tif" onclick="onlyOne(this)"> JPEG to TIF
+        <input type="radio" id="jpeg_to_tif" name="conversion_type" value="jpeg_to_tif">
+        <label for="jpeg_to_tif">JPEG to TIF</label>
     </p>
     <p>
-        <input type="checkbox" name="conversion_type" value="tif_to_jpeg" onclick="onlyOne(this)"> TIF to JPEG
+        <input type="radio" id="tif_to_jpeg" name="conversion_type" value="tif_to_jpeg">
+        <label for="tif_to_jpeg">TIF to JPEG</label>
     </p>
     <p>
-        <input type="checkbox" name="conversion_type" value="pdf_to_jpeg" onclick="onlyOne(this)"> PDF to JPEG
+        <input type="radio" id="pdf_to_jpeg" name="conversion_type" value="pdf_to_jpeg">
+        <label for="pdf_to_jpeg">PDF to JPEG</label>
     </p>
 
     <input type="submit" value="Отправить" />
 </form>
+
+{% if filename %}
+{{ filename }}
+{% endif %}
 
 <script>
 function onlyOne(checkbox) {
@@ -34,9 +41,3 @@ function onlyOne(checkbox) {
 }
 </script>
 
-{% if grad_init %}
-<h2>Результат:</h2>
-<p>{{ degree_dec }}</p>
-{% endif %}
-
-{% endblock %}

@@ -6,6 +6,10 @@
 <h2>{{ error }}</h2>
     {% endif %}
 
+    {% if message %}
+    <h2>{{message}}</h2>
+    {% endif %}
+
     <h2>Список дел</h2>
     <form action="to_do_list" method="post">
         <p>
