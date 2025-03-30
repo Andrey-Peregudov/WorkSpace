@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from starlette.middleware import Middleware
@@ -10,6 +10,7 @@ from .converter import converter_file
 from .user_create import user_create
 from .user_login import user_login
 from .to_do_list import to_do_list
+
 
 
 middleware = [
@@ -28,12 +29,16 @@ app = FastAPI(
 #Путь до директории static
 app.mount("/static", StaticFiles(directory="static", packages=None, html=False, check_dir=True, follow_symlink=False), name="static")
 
-#Путь до директории templates
-templates = templates
+# #Путь до директории templates
+# templates = templates
 
-@app.get("/", tags=["Главная страница"])
-def root():
-    return FileResponse("templates/base.html")
+# @app.get("/", tags=["Главная страница"])
+# async def root():
+#     return FileResponse("templates/base.html")
+
+@app.get("/")
+async def info(request: Request):
+    return templates.TemplateResponse("info.html", {"request": request})
 
 #Шаблон банера ошибки 404
 @app.exception_handler(404)

@@ -3,10 +3,7 @@ from fastapi.responses import HTMLResponse
 import json
 from template_metod import templates
 
-
 router = APIRouter()
-
-templates = templates
 
 #URL адрес и путь к HTML странице с шаблоном поиском отклонений
 @router.get("/tolerances", tags=["Поля допусков"], response_class=HTMLResponse)

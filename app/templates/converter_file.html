@@ -8,7 +8,7 @@
     <p>
         Выберите изображение для конвертации:<br>
         <label for="converter_file" class="file">Добавить файл</label>
-        <input type="file" id="converter_file" name="converter_file" accept="image/jpeg,image/tiff,application/pdf" />
+        <input type="file" id="converter_file" name="converter_file" accept="image/jpeg,image/tiff,application/pdf" required/>
     </p>
     <p>
         <input type="radio" id="jpeg_to_tif" name="conversion_type" value="jpeg_to_tif">
@@ -26,6 +26,7 @@
     <input type="submit" value="Отправить" />
 </form>
 
+{{ result }}
 {% if filename %}
 {{ filename }}
 {% endif %}
@@ -40,4 +41,10 @@ function onlyOne(checkbox) {
     });
 }
 </script>
+{% if file and result %}
+<h2>{{ file }}</h2>
+<h2>{{ result }}</h2>
+
+{% endif %}
+{% endblock %}
 
