@@ -1,79 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WS - Инженерные Расчёты</title>
+    <link rel="shortcut icon" href="./icons/logo.png">
     <link rel="stylesheet" rel="stylesheet" href="../static/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link type="image/x-icon" rel="shortcut icon" href="./image/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <script src="../static/main.js" defer></script> <!-- defer - чтобы скрипт выполнялся после загрузки HTML -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}WorkSpace{% endblock %}</title>
 </head>
 <body>
-    <div class="container">
-    <header>
-        <nav class="navbar">
-            <a href="http://127.0.0.1:8080/" class="nav_logo nav_logo_image"><span class="work">Work</span><span class="space">Space</span></a>
 
-        <ul class="nav_menu">
-            <li class="nav_item">
-                <a href="http://127.0.0.1:8080/" class="nav_link">Главная</a>
-            </li>
-            <li class="nav_item">
-                <a href="http://127.0.0.1:8080/tolerances" class="nav_link">Определение отклонений</a>
-                   
-            </li>
+    <div class="main-container">
 
-            <li class="nav_item">
-                <a href="http://127.0.0.1:8080/degree" class="nav_link">Конвертор градусов</a>
-                <ul>
-                    <li class="nav_item">
-                        <a href="http://127.0.0.1:8080/degree" class="nav_link">Градусы в десятичную систему</a>
-                    </li>
-                    <li class="nav_item">
-                        <a href="http://127.0.0.1:8080/degree_decimal" class="nav_link">Из десятичной системы в градусы</a>
-                    </li>
-                </ul>
-            </li>
-
-            <li class="nav_item">
-                <a href="http://127.0.0.1:8080/converter_file" class="nav_link">Конвертор файлов</a>
-            </li>
-            <li class="nav_item">
-                <a href="http://127.0.0.1:8080/user_create" class="nav_link">Регистрация</a>
-            </li>
-            <li class="nav_item">
-                <a href="http://127.0.0.1:8080/user_login" class="nav_link">Вход</a>
-            </li>
-        </ul>
-    </nav>
-    </header>
-
-
-    <div class="wrapper">
-
-        {% block content %}{% endblock %}
-
-    <div class="wrapper">
-
-  
-    </div>
+        <header class="header">
+            <div class="icon">
+                <a href="http://127.0.0.1:8080/" style="text-decoration: none; color: inherit;">
+                    <h1>Work<span class="space">Space</span></h1>
+                </a>
+            </div>
+            <div class="header-content">
+                <div class="main-header">
+                    <h2 id="clock"><span id="span"></span></h2>
+                </div>
+            </div>
+        </header>
+    
+        <main class="content">
+            <nav class="menu">
+                <a href="http://127.0.0.1:8080/" class="menu-point">Главная</a>
+                <a href="http://127.0.0.1:8080/tolerances" class="menu-point">Определение отклонений</a>
+                <a href="http://127.0.0.1:8080/degree" class="menu-point">Перевод градусов в десятичную систему</a>
+                <a href="http://127.0.0.1:8080/degree_decimal" class="menu-point">Из десятичной системы в градусы</a>
+                <a href="http://127.0.0.1:8080/converter_file" class="menu-point">Конвертор файлов</a>
+                <a href="http://127.0.0.1:8080/user_create" class="menu-point">Регистрация</a>
+                <a href="http://127.0.0.1:8080/user_login" class="menu-point">Вход</a>
+                <a href="http://127.0.0.1:8080/to_do_list" class="menu-point">Список дел</a>
+            </nav>
+    
+            <div class="wrapper">
+                {% block content %}{% endblock %}
+            </div>
+        </main>
+    
         <div class="footer">
             <div class="row">
                 &#169; Copyright 2025. Made by Andrew Peregudov
-                      <div class="social-links">
-          <a href="https://t.me/" target="_blank" rel="noopener noreferrer">
-              <img src="./icons/TelegramFill.svg" alt="Telegram">
-          </a>
-          <a href="https://github.com" target="_blank" rel="noopener noreferrer">
-              <img src="./icons/GithubFill.svg" alt="GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none"><g clip-path="url(#akarIconsGithubFill0)"><path fill="currentColor" fill-rule="evenodd" d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385c.6.105.825-.255.825-.57c0-.285-.015-1.23-.015-2.235c-3.015.555-3.795-.735-4.035-1.41c-.135-.345-.72-1.41-1.23-1.695c-.42-.225-1.02-.78-.015-.795c.945-.015 1.62.87 1.845 1.23c1.08 1.815 2.805 1.305 3.495.99c.105-.78.42-1.305.765-1.605c-2.67-.3-5.46-1.335-5.46-5.925c0-1.305.465-2.385 1.23-3.225c-.12-.3-.54-1.53.12-3.18c0 0 1.005-.315 3.3 1.23c.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23c.66 1.65.24 2.88.12 3.18c.765.84 1.23 1.905 1.23 3.225c0 4.605-2.805 5.625-5.475 5.925c.435.375.81 1.095.81 2.22c0 1.605-.015 2.895-.015 3.3c0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12" clip-rule="evenodd"/></g><defs><clipPath id="akarIconsGithubFill0"><path fill="#fff" d="M0 0h24v24H0z"/></clipPath></defs></g></svg>
-          </a>
-      </div>
+                <div class="social-links">
+                    <a href="https://t.me/" target="_blank" rel="noopener noreferrer">
+                        <img src="./icons/TelegramFill.svg" alt="Telegram">
+                    </a>
+                    <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+                        <img src="./icons/GithubFill.svg" alt="GitHub">
+                    </a>
                 </div>
-
+            </div>
         </div>
     </div>
-
-
-</div>    
 </body>
 </html>

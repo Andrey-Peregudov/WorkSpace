@@ -7,44 +7,38 @@
 <form action="converter_file" method="post" enctype="multipart/form-data">
     <p>
         Выберите изображение для конвертации:<br>
-        <label for="converter_file" class="file">Добавить файл</label>
-        <input type="file" id="converter_file" name="converter_file" accept="image/jpeg,image/tiff,application/pdf" required/>
+        <label for="file" class="file">Добавить файл</label>
+        <input type="file" id="file" name="file" accept="image/jpeg,image/tiff,application/pdf" required/>
     </p>
     <p>
-        <input type="radio" id="jpeg_to_tif" name="conversion_type" value="jpeg_to_tif">
+        <input type="radio" id="jpeg_to_tif" name="conversion_type" value="jpeg_to_tif" required>
         <label for="jpeg_to_tif">JPEG to TIF</label>
     </p>
     <p>
-        <input type="radio" id="tif_to_jpeg" name="conversion_type" value="tif_to_jpeg">
+        <input type="radio" id="tif_to_jpeg" name="conversion_type" value="tif_to_jpeg" required>
         <label for="tif_to_jpeg">TIF to JPEG</label>
     </p>
     <p>
-        <input type="radio" id="pdf_to_jpeg" name="conversion_type" value="pdf_to_jpeg">
+        <input type="radio" id="pdf_to_jpeg" name="conversion_type" value="pdf_to_jpeg" required>
         <label for="pdf_to_jpeg">PDF to JPEG</label>
     </p>
+
 
     <input type="submit" value="Отправить" />
 </form>
 
-{{ result }}
 {% if filename %}
-{{ filename }}
+    <p>Исходный файл: {{ filename }}</p>
 {% endif %}
 
-<script>
-function onlyOne(checkbox) {
-    var checkboxes = document.getElementsByName('conversion_type');
-    checkboxes.forEach(function(item) {
-        if (item !== checkbox) {
-            item.checked = false;
-        }
-    });
-}
-</script>
-{% if file and result %}
-<h2>{{ file }}</h2>
-<h2>{{ result }}</h2>
-
+{% if result %}
+    <p>Результат: {{ result }}</p>
 {% endif %}
+
+{% if new_filename %}
+    <a href="{{ new_filename }}" download="{{ new_filename }}">
+        <button type="button">Скачать сконвертированный файл</button>
+    </a>
+{% endif %}
+
 {% endblock %}
-

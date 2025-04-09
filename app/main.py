@@ -25,20 +25,22 @@ middleware = [
 
 app = FastAPI(
     middleware=middleware,
-    title="WorkSpace")
+    title="WorkSpace",
+    docs_url=None,
+    redoc_url=None,
+)
 #Путь до директории static
 app.mount("/static", StaticFiles(directory="static", packages=None, html=False, check_dir=True, follow_symlink=False), name="static")
 
-# #Путь до директории templates
-# templates = templates
-
-# @app.get("/", tags=["Главная страница"])
-# async def root():
-#     return FileResponse("templates/base.html")
-
+#Шаблон главной страницы
 @app.get("/")
 async def info(request: Request):
     return templates.TemplateResponse("info.html", {"request": request})
+
+#Шаблон банера ошибки 400
+@app.exception_handler(404)
+async def custom_404_handler(request, __):
+    return templates.TemplateResponse("404.html", {"request": request})
 
 #Шаблон банера ошибки 404
 @app.exception_handler(404)
@@ -47,6 +49,11 @@ async def custom_404_handler(request, __):
 
 #Шаблон банера ошибки 422
 @app.exception_handler(422)
+async def custom_422_handler(request, __):
+    return templates.TemplateResponse("422.html", {"request": request})
+
+#Шаблон банера ошибки 500
+@app.exception_handler(500)
 async def custom_422_handler(request, __):
     return templates.TemplateResponse("422.html", {"request": request})
 
