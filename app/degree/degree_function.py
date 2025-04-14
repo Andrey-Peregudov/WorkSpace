@@ -11,14 +11,12 @@ templates = templates
 def get_degree_form(request: Request):
     return templates.TemplateResponse("degree.html", {"request": request})
 
-@router.get('/degree', response_class=HTMLResponse, summary="Перевод градусов вдесятичную систему", tags=["Конвертёр"])
 @router.post('/degree', response_class=HTMLResponse, summary="Перевод градусов вдесятичную систему", tags=["Конвертёр"])
 async def convert_degree(request: Request,
                            degree: int = Form(le=360),
                            minute: int = Form(le=60),
                            second: float = Form(le=60)):
     try:
-
         degree, minute, second = float(degree), float(minute), float(second)
         result = (degree + (minute / 60) + (second / 3600))
         result = round(result, 2)

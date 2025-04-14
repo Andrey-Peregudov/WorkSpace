@@ -37,31 +37,38 @@ app.mount("/static", StaticFiles(directory="static", packages=None, html=False, 
 async def info(request: Request):
     return templates.TemplateResponse("info.html", {"request": request})
 
-#Шаблон банера ошибки 400
+#Шаблон банера ошибки 400 Bad Request
 @app.exception_handler(400)
 async def custom_400_handler(request, __):
     return templates.TemplateResponse("400.html", {"request": request})
-#Шаблон банера ошибки 401
+
+#Шаблон банера ошибки 401 Unauthorized
 @app.exception_handler(401)
 async def custom_401_handler(request, __):
     return templates.TemplateResponse("401.html", {"request": request})
-#Шаблон банера ошибки 403
+
+#Шаблон банера ошибки 403 Forbidden
 @app.exception_handler(403)
 async def custom_403_handler(request, __):
     return templates.TemplateResponse("403.html", {"request": request})
-#Шаблон банера ошибки 404
+
+#Шаблон банера ошибки 404 Not Found
 @app.exception_handler(404)
 async def custom_404_handler(request, __):
     return templates.TemplateResponse("404.html", {"request": request})
-#Шаблон банера ошибки 422
+
+#Шаблон банера ошибки 422 Unprocessable Entity
 @app.exception_handler(422)
 async def custom_422_handler(request, __):
     return templates.TemplateResponse("422.html", {"request": request})
-#Шаблон банера ошибки 500
+
+#Шаблон банера ошибки 500 Internal Server Error
 @app.exception_handler(500)
 async def custom_500_handler(request, __):
     return templates.TemplateResponse("500.html", {"request": request})
-@app.exception_handler(501)
+
+#Шаблон банера ошибки 501 Not Implemented
+@app.exception_handler(501) 
 async def custom_501_handler(request, __):
     return templates.TemplateResponse("501.html", {"request": request})
 
