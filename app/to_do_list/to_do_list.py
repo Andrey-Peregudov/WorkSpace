@@ -15,7 +15,7 @@ router = APIRouter()
 def to_do_page(request: Request):
     return templates.TemplateResponse("to_do_list.html", {"request": request})
 
-@router.get("/to_do_list", response_class=HTMLResponse, summary="Список дел", tags=["Список дел"])
+
 @router.post("/to_do_list", response_class=HTMLResponse, summary="Список дел", tags=["Список дел"])
 async def to_do(request: Request,
                 db: AsyncSession = Depends(get_session),

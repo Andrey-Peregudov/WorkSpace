@@ -1,5 +1,3 @@
-from enum import nonmember
-from typing import Optional
 from PIL import Image
 from fastapi import Request, APIRouter, UploadFile, Form, HTTPException
 from fastapi.responses import HTMLResponse, FileResponse
@@ -7,17 +5,20 @@ from ..template_metod import templates
 import os
 import uuid
 import io
-
-
+from shutil import rmtree
 
 router = APIRouter()
 
-@router.get("/converter_file", tags=["Конвертер файлов"], response_class=HTMLResponse)
-def get_file_convert_form(request: Request):
-    return templates.TemplateResponse("converter_file.html", {"request": request})
+# @router.get("/converter_file", tags=["Конвертер файлов"], response_class=HTMLResponse)
+# def get_file_convert_form(request: Request):
+#     return templates.TemplateResponse("converter_file.html", {"request": request})
 
 UPLOAD_DIR = "image_data"
-os.makedirs(UPLOAD_DIR, exist_ok=True)
+MAX_DIR_SIZE_MB = 1024 # Максимальный размер папки в мегабайтах (1GB)
+MAX_FILE_AGE_SECONDS = 3600 # Максимальный возраст файла в секундах (1 час)
+
+
+
 
 @router.get('/converter_file', response_class=HTMLResponse, summary="Отображение формы", tags=["Конвертёр файлов"])
 async def get_converter_form(request: Request):
