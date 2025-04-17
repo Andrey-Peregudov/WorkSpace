@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
+from fastapi.exceptions import RequestValidationError
 from starlette.middleware import Middleware
 from starlette.middleware.cors import CORSMiddleware
 from template_metod import templates
@@ -58,7 +59,7 @@ async def custom_404_handler(request, __):
     return templates.TemplateResponse("404.html", {"request": request})
 
 #Шаблон банера ошибки 422 Unprocessable Entity
-@app.exception_handler(422)
+@app.exception_handler(RequestValidationError)
 async def custom_422_handler(request, __):
     return templates.TemplateResponse("422.html", {"request": request})
 
