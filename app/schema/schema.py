@@ -2,6 +2,7 @@ from pydantic import EmailStr, BaseModel
 from datetime import datetime
 from typing import Optional
 
+# Pydantic схемы для Пользователей и списков дел
 class UserCreate(BaseModel):
     first_name: str
     last_name: Optional[str] = None

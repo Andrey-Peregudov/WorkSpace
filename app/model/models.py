@@ -3,7 +3,7 @@ from sqlalchemy.orm import relationship
 import bcrypt
 from ..model.dbbase import Base
 
-
+# Создание таблиц Пользаватель и список дел
 class UserDB(Base):
     __tablename__ = "users"
     id = Column(Integer, primary_key=True,index=True)

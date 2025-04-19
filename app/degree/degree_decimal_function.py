@@ -14,6 +14,7 @@ def get_degree_form(request: Request):
 async def convert_dec_degree(request: Request,
                            degree_dec : float = Form(le=360)):
     try:
+        # Расчёт конвертации градусов
         grad_init = int(degree_dec)
         grad_float = float(degree_dec-grad_init)
         minute = (grad_float*60)/1

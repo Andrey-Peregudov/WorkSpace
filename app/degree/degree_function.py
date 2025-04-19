@@ -18,6 +18,7 @@ async def convert_degree(request: Request,
                            minute: Optional[int] = Form(default=0, le=60),
                            second: Optional[float] = Form(default=0.0, le=60)):
     try:
+        # Расчёт конвертации градусов
         degree, minute, second = float(degree), float(minute), float(second)
         result = (degree + (minute / 60) + (second / 3600))
         result = round(result, 2)

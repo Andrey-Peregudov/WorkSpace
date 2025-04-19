@@ -25,16 +25,21 @@ async def user_create(
     email: str = Form(...),
     password: str = Form(...),
     db: AsyncSession = Depends(get_session)):
+    # Пустой список ошибок
     error = []
     try:
+        # Запрос к БД столбец email
         query = select(UserDB).where(UserDB.email == email)
+        # Выполняется асинхронный запрос к БД
         result = await db.execute(query)
+        # Получение первого совпавшего объекта
         db_user = result.scalars().first()
 
         if db_user is None:
             error.append("Такого пользователя нет")
             return templates.TemplateResponse("user_login.html", {"request": request, "error": error})
         else:
+            # Получение JWT
             if db_user.check_password(password):
                 jwt_token = jwt.encode(claims={"sub":email}, key=key, algorithm = algorithm)
                 response.set_cookie(key="access_token", value=jwt_token, httponly=True)
