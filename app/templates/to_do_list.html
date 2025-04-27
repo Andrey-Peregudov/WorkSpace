@@ -1,21 +1,20 @@
 {% extends "base.html" %}
-{% block title %}Предельные отклонения{% endblock %}
+{% block title %}Список дел{% endblock %}
 {% block content %}
 
     {% if error %}
-<h2>{{ error }}</h2>
+        <h2>{{ error }}</h2>
     {% endif %}
 
     {% if message %}
-    <h2>{{message}}</h2>
+        <h2>{{message}}</h2>
     {% endif %}
 
     <h2>Список дел</h2>
     <form action="to_do_list" method="post">
-        <p>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">  
             Запланировать дело:<br>
-            <input name="to_do_list" type="text" />
-        </p>
+            <input name="to_do" type="text" />  
         <input type="submit" value="Запланировать" />
     </form>
 {% endblock %}
