@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WS - Инженерные Расчёты</title>
-    <link rel="shortcut icon" href="./icons/logo.png">
+    <link rel="icon" href="../static/icons/logo.png" type="image/svg+xml">
     <link rel="stylesheet" rel="stylesheet" href="../static/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,6 +12,7 @@
     <script src="../static/main.js" defer></script> <!-- defer - чтобы скрипт выполнялся после загрузки HTML -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}WorkSpace{% endblock %}</title>
+
 </head>
 <body>
 
@@ -20,6 +21,7 @@
         <header class="header">
             <div class="icon">
                 <a href="http://127.0.0.1:8080/" style="text-decoration: none; color: inherit;">
+                    <img src="../static/icons/logo.png" alt="WorkSpace">
                     <h1>Work<span class="space">Space</span></h1>
                 </a>
             </div>
@@ -28,6 +30,13 @@
                     <h2 id="clock"><span id="span"></span></h2>
                     <h2 id="date"><span id="date_now"></span></h2>
                 </div>
+            </div>
+            <div>
+                {% if current_user %}
+                <span class="user_name">
+                    Добро пожаловать, {{ user_name }}!
+                </span> 
+                {% endif %}
             </div>
         </header>
     
@@ -38,10 +47,15 @@
                 <a href="http://127.0.0.1:8080/degree" class="menu-point">Перевод градусов в десятичную систему</a>
                 <a href="http://127.0.0.1:8080/degree_decimal" class="menu-point">Из десятичной системы в градусы</a>
                 <a href="http://127.0.0.1:8080/converter_file" class="menu-point">Конвертор файлов</a>
+            {% if current_user %}
+                <a href="http://127.0.0.1:8080/to_do_list" class="menu-point">Список дел</a>
+                <a href="http://127.0.0.1:8080/logout" class="menu-point">Выход</a>
+
+            {% else %}
                 <a href="http://127.0.0.1:8080/user_create" class="menu-point">Регистрация</a>
                 <a href="http://127.0.0.1:8080/user_login" class="menu-point">Вход</a>
-                <a href="http://127.0.0.1:8080/to_do_list" class="menu-point">Список дел</a>
-            </nav>
+            {% endif %}
+                </nav>
     
             <div class="wrapper">
                 {% block content %}{% endblock %}
@@ -53,10 +67,10 @@
                 &#169; Copyright 2025. Made by Andrew Peregudov
                 <div class="social-links">
                     <a href="https://t.me/" target="_blank" rel="noopener noreferrer">
-                        <img src="./icons/TelegramFill.svg" alt="Telegram">
+                        <img src="../static/icons/TelegramFill.svg" alt="Telegram">
                     </a>
-                    <a href="https://github.com" target="_blank" rel="noopener noreferrer">
-                        <img src="./icons/GithubFill.svg" alt="GitHub">
+                    <a href="https://github.com/Andrey-Peregudov" target="_blank" rel="noopener noreferrer">
+                        <img src="../static/icons/GithubFill.svg" alt="GitHub">
                     </a>
                 </div>
             </div>

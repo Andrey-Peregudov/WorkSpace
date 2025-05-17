@@ -2,12 +2,11 @@ from fastapi import Form, Request, APIRouter, Depends, Response
 from fastapi.responses import RedirectResponse
 from ..template_metod import templates
 from sqlalchemy.ext.asyncio import AsyncSession
-from ..model.models import UserDB, UserDB
+from ..model.models import UserDB
 from ..model.dbbase import get_session
 from sqlalchemy import select
 from jose import jwt
 from ..config import key, algorithm
-
 
 router = APIRouter(include_in_schema=False)
 
@@ -16,7 +15,6 @@ templates = templates
 @router.get("/user_login")
 async def registration(request: Request):
     return templates.TemplateResponse("user_login.html", {"request": request})
-
 
 @router.post("/user_login")
 async def user_create(
@@ -54,24 +52,3 @@ async def user_create(
         print(e)
         error.append("Ошибка при входе")
         return templates.TemplateResponse("user_login.html", {"request": request, "error": error})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
