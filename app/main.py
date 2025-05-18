@@ -13,7 +13,6 @@ from .user_login import user_login
 from .user_login.get_current_user import get_current_user
 from .to_do_list import to_do_list
 
-# Функции которые выполняются для каждого запроса, перед выполнением endpoint
 from .user_logout import user_logout
 from .model.models import UserDB
 
