@@ -5,7 +5,6 @@ from ..template_metod import templates
 import os
 import uuid
 import io
-from shutil import rmtree
 
 router = APIRouter()
 
@@ -70,7 +69,6 @@ async def create_upload_file(request: Request,
             media_type="image/tiff" if save_format == "TIFF" else "image/jpeg",
             filename=download_filename
         )
-
 
     except Exception as e:
         print(f"Error: {e}")
